@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/KarthikrajDevOps/GBMOT%20SRE/_apis/build/status%2FkarthikrajRPAGit.webapp?branchName=main)](https://dev.azure.com/KarthikrajDevOps/GBMOT%20SRE/_build/latest?definitionId=6&branchName=main)
+
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
