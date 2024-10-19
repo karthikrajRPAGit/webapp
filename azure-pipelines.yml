@@ -21,12 +21,12 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
-    python app.py &
+    python app/src/app.py &
   displayName: 'Running Webapp'
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest test_sample.py
+    pytest app/test/test_sample.py
   displayName: 'pytest'
 
 - script: |
@@ -37,3 +37,24 @@ steps:
 - task: PublishCodeCoverageResults@2
   inputs:
     summaryFileLocation: '**/coverage.xml'
+
+- script: |
+    python setup.py bdist_wheel
+    python setup.py sdist
+  displayName: 'packaging the webapp'
+
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'jfrogartifactory'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "dist/*",
+            "target": "azdevops-pypi-local"
+          }
+        ]
+      }
+    failNoOp: true
+
