@@ -56,15 +56,9 @@ steps:
         ]
       }
     failNoOp: true
-
-- task: ArtifactoryBuildPromotion@1
+- task: ArtifactoryPublishBuildInfo@1
   inputs:
     artifactoryService: 'jfrogartifactory'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    targetRepo: 'azdevops-pypi-local'
-    status: 'Released'
-    includeDependencies: true
-    copy: true
-    dryRun: false
 
