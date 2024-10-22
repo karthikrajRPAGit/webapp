@@ -39,8 +39,18 @@ steps:
     summaryFileLocation: '**/coverage.xml'
 
 - script: |
-    python setup.py bdist_wheel
+    python setup.py sdist
   displayName: 'packaging the webapp'
+
+- task: CopyFiles@2  
+  inputs:    
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1  
+  inputs:    
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'                  
+    ArtifactName: 'dist'    
+    publishLocation: 'Container'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
@@ -56,9 +66,4 @@ steps:
         ]
       }
     failNoOp: true
-- task: ArtifactoryPublishBuildInfo@1
-  inputs:
-    artifactoryService: 'jfrogartifactory'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
 
