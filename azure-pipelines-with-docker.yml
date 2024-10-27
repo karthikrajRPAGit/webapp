@@ -39,7 +39,7 @@ stages:
           $(tag)
           latest
 
-- stage: Getting Build Artifacts Ready
+- stage: Artifacts
   displayName: Copy and Publish Build Artifacts
   jobs:
   - job: Artifacts
