@@ -57,17 +57,4 @@ stages:
         ArtifactName: 'dist'    
         publishLocation: 'Container'
 
-- stage: StartDocker
-  displayName: Start Docker Container
-  jobs:
-  - job: DockerContainerStart
-    displayName: Start Docker Container
-    pool:
-      name: VMPool
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'pythonwebapp2306registry'
-        command: 'start'
-
 
