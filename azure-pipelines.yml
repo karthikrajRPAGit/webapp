@@ -39,7 +39,7 @@ steps:
     summaryFileLocation: '**/coverage.xml'
 
 - script: |
-    python setup.py sdist
+    python setup.py sdist bdist_wheel
   displayName: 'packaging the webapp'
 
 - task: CopyFiles@2  
