@@ -39,22 +39,24 @@ steps:
     summaryFileLocation: '**/coverage.xml'
 
 - script: |
-    python setup.py bdist_wheel
     python setup.py sdist
   displayName: 'packaging the webapp'
 
-- task: ArtifactoryGenericUpload@2
+- task: CopyFiles@2  
+  inputs:    
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1  
+  inputs:    
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'                  
+    ArtifactName: 'dist'    
+    publishLocation: 'Container'
+
+- task: TwineAuthenticate@1
   inputs:
-    artifactoryService: 'jfrogartifactory'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "dist/*",
-            "target": "azdevops-pypi-local"
-          }
-        ]
-      }
-    failNoOp: true
+    artifactFeed: 'GBMOT SRE/pythonwebapps'
+
+- script: |
+    python -m twine upload -r pythonwebapps --config-file $(PYPIRC_PATH) dist/*.whl
+  displayName: 'Upload to Azure Artifact Feed'
 

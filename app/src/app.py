@@ -1,5 +1,5 @@
 from flask import Flask
-
+import os
 # Flask constructor takes the name of 
 # current module (__name__) as argument.
 app = Flask(__name__)
@@ -10,11 +10,12 @@ app = Flask(__name__)
 @app.route('/')
 # ‘/’ URL is bound with hello_world() function.
 def hello_world():
-    return 'Hello World'
+    hostname = os.uname()[1]
+    return 'Hello World - '+str(hostname)
 
 # main driver function
 if __name__ == '__main__':
 
     # run() method of Flask class runs the application 
     # on the local development server.
-    app.run()
+    app.run(host="0.0.0.0", port=int(5000), debug=True)
