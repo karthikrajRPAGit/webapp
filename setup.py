@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="webapp",
-    version="0.0.1",
+    version="0.0.2",
     package_dir={"":"app"},
     packages=find_packages(where="app"),
     install_requires=["flask","requests"],
