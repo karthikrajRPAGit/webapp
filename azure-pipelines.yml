@@ -52,18 +52,11 @@ steps:
     ArtifactName: 'dist'    
     publishLocation: 'Container'
 
-- task: ArtifactoryGenericUpload@2
+- task: TwineAuthenticate@1
   inputs:
-    artifactoryService: 'jfrogartifactory'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "dist/*",
-            "target": "azdevops-pypi-local"
-          }
-        ]
-      }
-    failNoOp: true
+    artifactFeed: 'GBMOT SRE/pythonwebapps'
+
+- script: |
+    python -m twine upload -r pythonwebapps --config-file $(PYPIRC_PATH) dist/*.whl
+  displayName: 'Upload to Azure Artifact Feed'
 
