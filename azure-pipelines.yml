@@ -60,6 +60,6 @@ steps:
     artifactFeed: 'GBMOT SRE/pythonwebapps'
 
 - script: |
-    python -m twine upload -r pythonwebapps --config-file $(PYPIRC_PATH) dist/*.whl
+    python -m twine upload -r pythonwebapps --config-file $(PYPIRC_PATH) --skip-existing dist/*.whl
   displayName: 'Upload to Azure Artifact Feed'
 
