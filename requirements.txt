@@ -4,3 +4,4 @@ coverage
 setuptools
 wheel
 twine
+pyodbc
